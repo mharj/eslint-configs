@@ -10,10 +10,11 @@ function Setup-Eslint {
     switch ($type)
     {
         "backend" {
-            Write-Output "Download typescript-backend.ps1 from github"
-            Invoke-WebRequest -URI  'https://raw.githubusercontent.com/mharj/eslint-configs/main/typescript-backend.ps1' -OutFile "$env:TEMP\typescript-backend.ps1"
-            Write-Output "Run typescript-backend.ps1"
-            . "$env:TEMP\typescript-backend.ps1"
+            $file = "typescript-backend-eslint.ps1"
+            Write-Output "Download $file from github"
+            Invoke-WebRequest -URI  "https://raw.githubusercontent.com/mharj/eslint-configs/main/$file" -OutFile "$env:TEMP\$file"
+            Write-Output "Run $file"
+            . "$env:TEMP\$file"
         }
     }
 }
