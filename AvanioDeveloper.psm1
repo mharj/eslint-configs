@@ -41,3 +41,4 @@ function Setup-Typescript {
 }
 
 Export-ModuleMember -Function Setup-Eslint
+Export-ModuleMember -Function Setup-Typescript
