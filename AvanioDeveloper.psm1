@@ -21,4 +21,23 @@ function Setup-Eslint {
     }
 }
 
+function Setup-Typescript {
+    param (
+        [ValidateSet("backend")]
+        [string] $type
+    )
+    switch ($type)
+    {
+        "backend" {
+            $file = "typescript-backend.ps1"
+            $url = "https://raw.githubusercontent.com/mharj/eslint-configs/main/$file"
+            $tmpFile = "$env:TEMP\$file"
+            Write-Output "Download $url => $tmpFile"
+            Invoke-WebRequest -URI  $url -OutFile $tmpFile
+            Write-Output "Run $tmpFile"
+            . $tmpFile
+        }
+    }
+}
+
 Export-ModuleMember -Function Setup-Eslint
