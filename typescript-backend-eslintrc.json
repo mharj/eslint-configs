@@ -16,6 +16,7 @@
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-type-checked",
         "plugin:prettier/recommended",
         "plugin:sonarjs/recommended"
     ],
