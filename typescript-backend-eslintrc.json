@@ -58,6 +58,12 @@
                 "exceptAfterOverload": true,
                 "exceptAfterSingleLine": true
             }
+        ],
+        "@typescript-eslint/no-misused-promises": [
+            "error",
+            {
+              "checksVoidReturn": false
+            }
         ]
     }
 }
