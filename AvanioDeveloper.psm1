@@ -4,7 +4,7 @@ Invoke-WebRequest -URI  'https://raw.githubusercontent.com/mharj/eslint-configs/
 
 function Setup-Eslint {
     param (
-        [ValidateSet("backend")]
+        [ValidateSet("backend", "frontend")]
         [string] $type
     )
     switch ($type) {
