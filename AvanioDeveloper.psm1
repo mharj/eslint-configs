@@ -7,18 +7,24 @@ function Setup-Eslint {
         [ValidateSet("backend")]
         [string] $type
     )
-    switch ($type)
-    {
+    switch ($type) {
         "backend" {
             $file = "typescript-backend-eslintrc.ps1"
-            $url = "https://raw.githubusercontent.com/mharj/eslint-configs/main/$file"
-            $tmpFile = "$env:TEMP\$file"
-            Write-Output "Download $url => $tmpFile"
-            Invoke-WebRequest -URI  $url -OutFile $tmpFile
-            Write-Output "Run $tmpFile"
-            . $tmpFile
+        }
+        "frontend" {
+            $file = "typescript-frontend-eslintrc.ps1"
         }
     }
+    if (-not($file)) {
+        Write-Output "Invalid type: $type"
+        return
+    }
+    $url = "https://raw.githubusercontent.com/mharj/eslint-configs/main/$file"
+    $tmpFile = "$env:TEMP\$file"
+    Write-Output "Download $url => $tmpFile"
+    Invoke-WebRequest -URI  $url -OutFile $tmpFile
+    Write-Output "Run $tmpFile"
+    . $tmpFile
 }
 
 function Setup-Typescript {
@@ -26,8 +32,7 @@ function Setup-Typescript {
         [ValidateSet("backend")]
         [string] $type
     )
-    switch ($type)
-    {
+    switch ($type) {
         "backend" {
             $file = "typescript-backend.ps1"
             $url = "https://raw.githubusercontent.com/mharj/eslint-configs/main/$file"
