@@ -17,4 +17,4 @@ $BackendPackageList = @(
 
 Write-Output "setup ${type} typescript"
 Write-Output "install typescript packages"
-. "$NpmCmd i -D $($BackendPackageList -join ' ')"
+Invoke-Expression "$NpmCmd i -D $($BackendPackageList -join ' ')"
