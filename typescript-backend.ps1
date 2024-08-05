@@ -18,3 +18,5 @@ $BackendPackageList = @(
 Write-Output "setup ${type} typescript"
 Write-Output "install typescript packages"
 Invoke-Expression "$NpmCmd i -D $($BackendPackageList -join ' ')"
+# update gitattributes
+Invoke-WebRequest -URI 'https://raw.githubusercontent.com/mharj/eslint-configs/main/git/gitattributes_nodejs' -OutFile '.gitattributes'
