@@ -17,6 +17,7 @@
 		"plugin:sonarjs/recommended"
 	],
     "rules": {
+		"sort-imports": "off",
 		"import/order": [
 			"error",
 			{
@@ -38,7 +39,6 @@
 				"allowedNames": ["self"]
 			}
 		],
-		"sort-imports": ["warn", {"ignoreCase": true}],
 		"sort-keys": [
 			"warn",
 			"asc",
