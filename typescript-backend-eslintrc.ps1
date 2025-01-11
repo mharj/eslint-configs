@@ -8,8 +8,13 @@ if (Test-Path 'pnpm-lock.yaml') {
   $NpmCmd = "pnpm"
 }
 Write-Output "setup ${type} eslint"
-Write-Output "download eslint-configs template from github"
-Invoke-WebRequest -URI 'https://raw.githubusercontent.com/mharj/eslint-configs/main/typescript-backend-eslintrc.json' -OutFile '.eslintrc.json'
+if (-not(Test-Path '.eslintrc.json')) {
+  Write-Output "download eslint-configs template from github"
+  Invoke-WebRequest -URI 'https://raw.githubusercontent.com/mharj/eslint-configs/main/typescript-backend-eslintrc.json' -OutFile '.eslintrc.json'
+}
+else {
+  Write-Output ".eslintrc.json already exists, skipping download"
+}
 Write-Output "install eslint packages"
 
 $EslintPackageList = @(
@@ -22,7 +27,10 @@ $EslintPackageList = @(
   "eslint-plugin-sonarjs@0.23",
   "@typescript-eslint/parser",
   "@typescript-eslint/eslint-plugin",
-  "@stylistic/eslint-plugin"
+  "@stylistic/eslint-plugin",
+  "@stylistic/eslint-plugin-ts",
+  "eslint-import-resolver-typescript",
+  "eslint-plugin-import"
 )
 
 Invoke-Expression "$NpmCmd i -D $($EslintPackageList -join ' ')"
