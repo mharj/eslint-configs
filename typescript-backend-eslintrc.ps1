@@ -18,13 +18,13 @@ else {
 Write-Output "install eslint packages"
 
 $EslintPackageList = @(
-  "eslint@8",
+  "eslint@^8",
   "eslint-config-standard",
   "prettier",
   "eslint-config-prettier",
   "eslint-plugin-deprecation",
   "eslint-plugin-prettier",
-  "eslint-plugin-sonarjs@0.23",
+  "eslint-plugin-sonarjs@^0",
   "@typescript-eslint/parser",
   "@typescript-eslint/eslint-plugin",
   "@stylistic/eslint-plugin",
