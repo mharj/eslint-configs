@@ -21,7 +21,8 @@ function SetEslintRule {
   }
   Write-Output "set eslintrc.json:rules $key : $rule"
   $content = Get-Content ".eslintrc.json" | ConvertFrom-Json -Depth 99
-  $content.rules.$key = $rule
+  $content.rules = $content.rules | Select-Object -ExcludeProperty $key
+  $content.rules | Add-Member -Type NoteProperty -Name "$key" -Value "$value"
   $content | ConvertTo-Json -Depth 99 | Set-Content ".eslintrc.json"
 }
 
