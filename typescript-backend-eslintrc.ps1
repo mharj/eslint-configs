@@ -6,7 +6,7 @@ function RemoveDevDependency {
   )
   $content = Get-Content "package.json" | ConvertFrom-Json
   $content.devDependencies = $content.devDependencies | Select-Object -ExcludeProperty $key
-  $content | ConvertTo-Json | Set-Content "package.json"
+  $content | ConvertTo-Json -Depth 99 | Set-Content "package.json"
 }
 
 function SetEslintRule {
@@ -20,7 +20,7 @@ function SetEslintRule {
   }
   $content = Get-Content ".eslintrc.json" | ConvertFrom-Json
   $content.rules | Add-Member -Type NoteProperty -Name $rule -Value $true
-  $content | ConvertTo-Json | Set-Content ".eslintrc.json"
+  $content | ConvertTo-Json -Depth 99 | Set-Content ".eslintrc.json"
 }
 
 function RemoveEslintRule {
@@ -33,7 +33,7 @@ function RemoveEslintRule {
   }
   $content = Get-Content ".eslintrc.json" | ConvertFrom-Json
   $content.rules = $content.rules | Select-Object -ExcludeProperty $key
-  $content | ConvertTo-Json | Set-Content ".eslintrc.json"
+  $content | ConvertTo-Json -Depth 99 | Set-Content ".eslintrc.json"
 }
 
 if (-not(Test-Path 'package.json')) {
