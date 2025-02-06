@@ -5,7 +5,7 @@
 		"sourceType": "module",
 		"project": "./tsconfig.test.json"
 	},
-	"plugins": ["@typescript-eslint", "@stylistic/ts", "import", "prettier", "sonarjs", "deprecation"],
+	"plugins": ["@typescript-eslint", "@stylistic/ts", "import", "prettier", "sonarjs"],
 	"extends": [
 		"standard",
 		"eslint:recommended",
@@ -58,7 +58,7 @@
 				"caughtErrorsIgnorePattern": "^_"
 			}
 		],
-		"deprecation/deprecation": "warn",
+		"@typescript-eslint/no-deprecated": "warn",
 		"lines-between-class-members": "off",
 		"@stylistic/ts/lines-between-class-members": [
 			"warn",
