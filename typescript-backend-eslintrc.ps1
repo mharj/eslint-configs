@@ -4,6 +4,7 @@ function RemoveDevDependency {
   param (
     [string] $key
   )
+  Write-Output "remove package.json:devDependencies $key"
   $content = Get-Content "package.json" | ConvertFrom-Json -Depth 99
   $content.devDependencies = $content.devDependencies | Select-Object -ExcludeProperty $key
   $content | ConvertTo-Json -Depth 99 | Set-Content "package.json"
@@ -18,6 +19,7 @@ function SetEslintRule {
     Write-Output "eslintrc.json not found!"
     return
   }
+  Write-Output "set eslintrc.json:rules $key : $rule"
   $content = Get-Content ".eslintrc.json" | ConvertFrom-Json -Depth 99
   $content.rules.$key = $rule
   $content | ConvertTo-Json -Depth 99 | Set-Content ".eslintrc.json"
@@ -31,6 +33,7 @@ function RemoveEslintRule {
     Write-Output "eslintrc.json not found!"
     return
   }
+  Write-Output "remove eslintrc.json:rules $key"
   $content = Get-Content ".eslintrc.json" | ConvertFrom-Json -Depth 99
   $content.rules = $content.rules | Select-Object -ExcludeProperty $key
   $content | ConvertTo-Json -Depth 99 | Set-Content ".eslintrc.json"
@@ -44,8 +47,9 @@ function RemoveEslintPlugin {
     Write-Output "eslintrc.json not found!"
     return
   }
+  Write-Output "remove eslintrc.json:plugins $key"
   $content = Get-Content ".eslintrc.json" | ConvertFrom-Json -Depth 99
-  $content.plugins = $content.plugins | Select-Object -ExcludeProperty $key
+  $content.plugins = $content.plugins | Where-Object { $_ -ne $key }
   $content | ConvertTo-Json -Depth 99 | Set-Content ".eslintrc.json"
 }
 
