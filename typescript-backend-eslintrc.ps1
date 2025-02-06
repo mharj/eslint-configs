@@ -4,7 +4,7 @@ function RemoveDevDependency {
   param (
     [string] $key
   )
-  $content = Get-Content "package.json" | ConvertFrom-Json
+  $content = Get-Content "package.json" | ConvertFrom-Json -Depth 99
   $content.devDependencies = $content.devDependencies | Select-Object -ExcludeProperty $key
   $content | ConvertTo-Json -Depth 99 | Set-Content "package.json"
 }
@@ -18,7 +18,7 @@ function SetEslintRule {
     Write-Output "eslintrc.json not found!"
     return
   }
-  $content = Get-Content ".eslintrc.json" | ConvertFrom-Json
+  $content = Get-Content ".eslintrc.json" | ConvertFrom-Json -Depth 99
   $content.rules | Add-Member -Type NoteProperty -Name $rule -Value $true
   $content | ConvertTo-Json -Depth 99 | Set-Content ".eslintrc.json"
 }
@@ -31,7 +31,7 @@ function RemoveEslintRule {
     Write-Output "eslintrc.json not found!"
     return
   }
-  $content = Get-Content ".eslintrc.json" | ConvertFrom-Json
+  $content = Get-Content ".eslintrc.json" | ConvertFrom-Json -Depth 99
   $content.rules = $content.rules | Select-Object -ExcludeProperty $key
   $content | ConvertTo-Json -Depth 99 | Set-Content ".eslintrc.json"
 }
@@ -54,6 +54,7 @@ else {
   Write-Output "remove deprecation rule and use @typescript-eslint/no-deprecated"
   RemoveEslintRule -key "deprecation/deprecation"
   SetEslintRule -key "@typescript-eslint/no-deprecated" -rule "warn"
+  RemoveDevDependency -key "eslint-plugin-deprecation"
 }
 Write-Output "install eslint packages"
 
