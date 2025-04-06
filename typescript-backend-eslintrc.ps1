@@ -90,7 +90,7 @@ $EslintPackageList = @(
   "typescript-eslint"
 )
 
-Invoke-Expression "$NpmCmd update -D $($EslintPackageList -join ' ')"
+Invoke-Expression "$NpmCmd install -D $($EslintPackageList -join ' ')"
 if (-not(Test-Path 'tsconfig.test.json')) {
   Write-Output "tsconfig.test.json not found, eslint needs it to work properly!"
   return
