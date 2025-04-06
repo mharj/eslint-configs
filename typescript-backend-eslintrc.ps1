@@ -62,34 +62,32 @@ if (-not(Test-Path 'package.json')) {
 if (Test-Path 'pnpm-lock.yaml') {
   $NpmCmd = "pnpm"
 }
-Write-Output "setup ${type} eslint"
-if (-not(Test-Path '.eslintrc.json')) {
+Write-Output "setup ${type} eslint 9"
+if (-not(Test-Path 'eslint.config.mjs')) {
   Write-Output "download eslint-configs template from github"
-  Invoke-WebRequest -URI 'https://raw.githubusercontent.com/mharj/eslint-configs/main/typescript-backend-eslintrc.json' -OutFile '.eslintrc.json'
+  Invoke-WebRequest -URI 'https://raw.githubusercontent.com/mharj/eslint-configs/main/typescript-backend-eslint.config.mjs' -OutFile 'eslint.config.mjs'
 }
 else {
-  Write-Output ".eslintrc.json already exists, try to modify"
-  Write-Output "remove deprecation rule and use @typescript-eslint/no-deprecated"
-  RemoveEslintRule -key "deprecation/deprecation"
-  RemoveEslintPlugin -key "deprecation"
-  SetEslintRule -key "@typescript-eslint/no-deprecated" -rule "warn"
-  RemoveDevDependency -key "eslint-plugin-deprecation"
+  Write-Output "eslint.config.mjs already exists (ignored)"
 }
 Write-Output "install eslint packages"
 
 $EslintPackageList = @(
-  "eslint@^8",
-  "eslint-config-standard",
-  "prettier",
-  "eslint-config-prettier",
-  "eslint-plugin-prettier",
-  "eslint-plugin-sonarjs@^0",
-  "@typescript-eslint/parser",
-  "@typescript-eslint/eslint-plugin",
+  "@cspell/eslint-plugin",
+  "@eslint/js",
   "@stylistic/eslint-plugin",
   "@stylistic/eslint-plugin-ts",
+  "@typescript-eslint/eslint-plugin",
+  "@typescript-eslint/parser",
+  "eslint",
+  "eslint-config-prettier",
   "eslint-import-resolver-typescript",
-  "eslint-plugin-import"
+  "eslint-plugin-import",
+  "eslint-plugin-jsdoc",
+  "eslint-plugin-prettier",
+  "eslint-plugin-sonarjs",
+  "prettier",
+  "typescript-eslint"
 )
 
 Invoke-Expression "$NpmCmd update -D $($EslintPackageList -join ' ')"
