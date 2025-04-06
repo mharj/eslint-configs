@@ -91,6 +91,21 @@ $EslintPackageList = @(
 )
 
 $LegacyEslintPackageList = @(
+  "@cspell/eslint-plugin",
+  "@eslint/js",
+  "@stylistic/eslint-plugin",
+  "@stylistic/eslint-plugin-ts",
+  "@typescript-eslint/eslint-plugin",
+  "@typescript-eslint/parser",
+  "eslint",
+  "eslint-config-prettier",
+  "eslint-import-resolver-typescript",
+  "eslint-plugin-import",
+  "eslint-plugin-jsdoc",
+  "eslint-plugin-prettier",
+  "eslint-plugin-sonarjs",
+  "prettier",
+  "typescript-eslint",
   'eslint-config-standard',
   'eslint-plugin-deprecation'
 )
