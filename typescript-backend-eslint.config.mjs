@@ -157,6 +157,9 @@ export default tseslint.config(
         },
       ],
       "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/prefer-nullish-coalescing": "warn",
+      "@typescript-eslint/prefer-optional-chain": "warn",
+      "sonarjs/no-commented-code": "warn", // to keep codebase clean
     },
   },
   {
