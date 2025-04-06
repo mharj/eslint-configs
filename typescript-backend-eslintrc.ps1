@@ -95,13 +95,14 @@ $LegacyEslintPackageList = @(
   'eslint-plugin-deprecation'
 )
 
+$NpmRemoveCmd = "$NpmCmd remove $($LegacyEslintPackageList -join ' ')"
+Write-Output "Running: $NpmRemoveCmd"
+Invoke-Expression "$NpmRemoveCmd"
+
 $NpmInstallCmd = "$NpmCmd install --save-dev $($EslintPackageList -join ' ')"
 Write-Output "Running: $NpmInstallCmd"
 Invoke-Expression "$NpmInstallCmd"
 
-$NpmRemoveCmd = "$NpmCmd remove $($LegacyEslintPackageList -join ' ')"
-Write-Output "Running: $NpmRemoveCmd"
-Invoke-Expression "$NpmRemoveCmd"
 if (-not(Test-Path 'tsconfig.test.json')) {
   Write-Output "tsconfig.test.json not found, eslint needs it to work properly!"
   return
